@@ -1,0 +1,12 @@
+{% for item in menu_items %}
+    {% if item.parent is None %}
+        <div>
+    {% endif %}
+    <a href="{% if item.url %}{{ item.url }}{% else %}{% url 'menu_view' item.name %}{% endif %}"
+       {% if request.path == item.url or request.path == item.get_absolute_url %}class="active"{% endif %}>
+       {{ item.name }}
+    </a>
+    {% if item.parent is None %}
+        </div>
+    {% endif %}
+{% endfor %}
